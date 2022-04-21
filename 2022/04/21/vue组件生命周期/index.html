@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      vue组件生命周期 
+      
+      
+      |
+    
+     357的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/color-scheme.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/comments.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">357</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">vue组件生命周期</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2022-04-21 20:33:47
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h2 id="什么是vue组件"><a href="#什么是vue组件" class="headerlink" title="什么是vue组件"></a>什么是vue组件</h2><p>官方文档里提到<br><em>一个组件本质上是一个拥有预定义选项的一个 Vue 实例</em><br>它是一个可以复用的vue实例</p>
+<h2 id="vue组件为什么会存在生命周期"><a href="#vue组件为什么会存在生命周期" class="headerlink" title="vue组件为什么会存在生命周期"></a>vue组件为什么会存在生命周期</h2><p>生命周期的定义:组件从创建到销毁的一个过程    </p>
+<p>过程如下：</p>
+<ul>
+<li>beforeCreate:组件创建前</li>
+<li>created：组件创建</li>
+<li>beforeMount：组件挂载前</li>
+<li>mounted：组件挂载</li>
+<li>beforeUpdate：组件更新前</li>
+<li>updated：组件更新</li>
+<li>beforeDestroy：组件销毁前</li>
+<li>destroyed：组件销毁</li>
+</ul>
+<p>生命周期的作用：<br>使用vue时，用到所有功能都是围绕vue生命周期实现的，在生命周期的不同阶段调用对应的钩子函数来实现组件数据管理和DOM渲染两大重要功能.  </p>
+<p>源码分析:  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/core/instance/init.js</span></span><br><span class="line"> <span class="comment">// expose real self</span></span><br><span class="line">    vm.<span class="property">_self</span> = vm</span><br><span class="line">    <span class="title function_">initLifecycle</span>(vm)</span><br><span class="line">    <span class="title function_">initEvents</span>(vm)</span><br><span class="line">    <span class="title function_">initRender</span>(vm)</span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&#x27;beforeCreate&#x27;</span>)</span><br><span class="line">    <span class="title function_">initInjections</span>(vm) <span class="comment">// resolve injections before data/props</span></span><br><span class="line">    <span class="title function_">initState</span>(vm)</span><br><span class="line">    <span class="title function_">initProvide</span>(vm) <span class="comment">// resolve provide after data/props</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&#x27;created&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>在初始化vm时会用到initLifecycle函数来触发生命周期。initEvents()初始化事件。initRender()初始化定义createElement函数<br>它在beforeCreate钩子触发前调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//src/core/instance/lifecycle.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">initLifecycle</span> (<span class="attr">vm</span>: <span class="title class_">Component</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> options = vm.<span class="property">$options</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// locate first non-abstract parent</span></span><br><span class="line">  <span class="keyword">let</span> parent = options.<span class="property">parent</span></span><br><span class="line">  <span class="keyword">if</span> (parent &amp;&amp; !options.<span class="property">abstract</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (parent.<span class="property">$options</span>.<span class="property">abstract</span> &amp;&amp; parent.<span class="property">$parent</span>) &#123;</span><br><span class="line">      parent = parent.<span class="property">$parent</span></span><br><span class="line">    &#125;</span><br><span class="line">    parent.<span class="property">$children</span>.<span class="title function_">push</span>(vm)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  vm.<span class="property">$parent</span> = parent</span><br><span class="line">  vm.<span class="property">$root</span> = parent ? parent.<span class="property">$root</span> : vm</span><br><span class="line"></span><br><span class="line">  vm.<span class="property">$children</span> = []</span><br><span class="line">  vm.<span class="property">$refs</span> = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  vm.<span class="property">_watcher</span> = <span class="literal">null</span></span><br><span class="line">  vm.<span class="property">_inactive</span> = <span class="literal">null</span></span><br><span class="line">  vm.<span class="property">_directInactive</span> = <span class="literal">false</span></span><br><span class="line">  vm.<span class="property">_isMounted</span> = <span class="literal">false</span></span><br><span class="line">  vm.<span class="property">_isDestroyed</span> = <span class="literal">false</span></span><br><span class="line">  vm.<span class="property">_isBeingDestroyed</span> = <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在参数合并阶段，会把所有同类钩子合并成数组，存放在<code>vm.$options</code><br>这里设置了一些标志位，作为钩子函数是否被使用的标识。<br><code>vm._inactive</code>表示keep-alive中组件状态<br>再找到调用钩子函数的函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//src/core/instance/lifecycle.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">callHook</span> (<span class="attr">vm</span>: <span class="title class_">Component</span>, <span class="attr">hook</span>: string) &#123;</span><br><span class="line">  <span class="comment">// #7573 disable dep collection when invoking lifecycle hooks</span></span><br><span class="line">  <span class="title function_">pushTarget</span>()</span><br><span class="line">  <span class="keyword">const</span> handlers = vm.<span class="property">$options</span>[hook]</span><br><span class="line">  <span class="keyword">const</span> info = <span class="string">`<span class="subst">$&#123;hook&#125;</span> hook`</span></span><br><span class="line">  <span class="keyword">if</span> (handlers) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, j = handlers.<span class="property">length</span>; i &lt; j; i++) &#123;</span><br><span class="line">      <span class="title function_">invokeWithErrorHandling</span>(handlers[i], vm, <span class="literal">null</span>, vm, info)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (vm.<span class="property">_hasHookEvent</span>) &#123;</span><br><span class="line">    vm.$emit(<span class="string">&#x27;hook:&#x27;</span> + hook)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">popTarget</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据传入的字符串hook，拿到<code>vm.$options[hook]</code>对应的回调函数数组，遍历执行<code>invokeWithErrorHandling</code><br>callhook 函数的功能就是调⽤某个⽣命周期钩⼦注册的所有回调函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/core/instance/init.js</span></span><br><span class="line"> <span class="comment">// expose real self</span></span><br><span class="line">    vm.<span class="property">_self</span> = vm</span><br><span class="line">    <span class="title function_">initLifecycle</span>(vm)</span><br><span class="line">    <span class="title function_">initEvents</span>(vm)</span><br><span class="line">    <span class="title function_">initRender</span>(vm)</span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&#x27;beforeCreate&#x27;</span>)</span><br><span class="line">    <span class="title function_">initInjections</span>(vm) <span class="comment">// resolve injections before data/props</span></span><br><span class="line">    <span class="title function_">initState</span>(vm)</span><br><span class="line">    <span class="title function_">initProvide</span>(vm) <span class="comment">// resolve provide after data/props</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&#x27;created&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>beforeCreate和created之间的三个方法是用来初始化inject,data,props等配置选项的。只能在created中访问到。  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//src/core/instance/lifecycle.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">mountComponent</span> (</span><br><span class="line">  <span class="attr">vm</span>: <span class="title class_">Component</span>,</span><br><span class="line">  <span class="attr">el</span>: ?<span class="title class_">Element</span>,</span><br><span class="line">  hydrating?: boolean</span><br><span class="line">): <span class="title class_">Component</span> &#123;</span><br><span class="line">  vm.<span class="property">$el</span> = el</span><br><span class="line">  <span class="keyword">if</span> (!vm.<span class="property">$options</span>.<span class="property">render</span>) &#123;</span><br><span class="line">    vm.<span class="property">$options</span>.<span class="property">render</span> = createEmptyVNode</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">/* istanbul ignore if */</span></span><br><span class="line">      <span class="keyword">if</span> ((vm.<span class="property">$options</span>.<span class="property">template</span> &amp;&amp; vm.<span class="property">$options</span>.<span class="property">template</span>.<span class="title function_">charAt</span>(<span class="number">0</span>) !== <span class="string">&#x27;#&#x27;</span>) ||</span><br><span class="line">        vm.<span class="property">$options</span>.<span class="property">el</span> || el) &#123;</span><br><span class="line">        <span class="title function_">warn</span>(</span><br><span class="line">          <span class="string">&#x27;You are using the runtime-only build of Vue where the template &#x27;</span> +</span><br><span class="line">          <span class="string">&#x27;compiler is not available. Either pre-compile the templates into &#x27;</span> +</span><br><span class="line">          <span class="string">&#x27;render functions, or use the compiler-included build.&#x27;</span>,</span><br><span class="line">          vm</span><br><span class="line">        )</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">warn</span>(</span><br><span class="line">          <span class="string">&#x27;Failed to mount component: template or render function not defined.&#x27;</span>,</span><br><span class="line">          vm</span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">callHook</span>(vm, <span class="string">&#x27;beforeMount&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> updateComponent</span><br><span class="line">  <span class="comment">/* istanbul ignore if */</span></span><br><span class="line">  <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; config.<span class="property">performance</span> &amp;&amp; mark) &#123;</span><br><span class="line">    updateComponent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> name = vm.<span class="property">_name</span></span><br><span class="line">      <span class="keyword">const</span> id = vm.<span class="property">_uid</span></span><br><span class="line">      <span class="keyword">const</span> startTag = <span class="string">`vue-perf-start:<span class="subst">$&#123;id&#125;</span>`</span></span><br><span class="line">      <span class="keyword">const</span> endTag = <span class="string">`vue-perf-end:<span class="subst">$&#123;id&#125;</span>`</span></span><br><span class="line"></span><br><span class="line">      <span class="title function_">mark</span>(startTag)</span><br><span class="line">      <span class="keyword">const</span> vnode = vm.<span class="title function_">_render</span>()</span><br><span class="line">      <span class="title function_">mark</span>(endTag)</span><br><span class="line">      <span class="title function_">measure</span>(<span class="string">`vue <span class="subst">$&#123;name&#125;</span> render`</span>, startTag, endTag)</span><br><span class="line"></span><br><span class="line">      <span class="title function_">mark</span>(startTag)</span><br><span class="line">      vm.<span class="title function_">_update</span>(vnode, hydrating)</span><br><span class="line">      <span class="title function_">mark</span>(endTag)</span><br><span class="line">      <span class="title function_">measure</span>(<span class="string">`vue <span class="subst">$&#123;name&#125;</span> patch`</span>, startTag, endTag)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    updateComponent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      vm.<span class="title function_">_update</span>(vm.<span class="title function_">_render</span>(), hydrating)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// we set this to vm._watcher inside the watcher&#x27;s constructor</span></span><br><span class="line">  <span class="comment">// since the watcher&#x27;s initial patch may call $forceUpdate (e.g. inside child</span></span><br><span class="line">  <span class="comment">// component&#x27;s mounted hook), which relies on vm._watcher being already defined</span></span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Watcher</span>(vm, updateComponent, noop, &#123;</span><br><span class="line">    before () &#123;</span><br><span class="line">      <span class="keyword">if</span> (vm.<span class="property">_isMounted</span> &amp;&amp; !vm.<span class="property">_isDestroyed</span>) &#123;</span><br><span class="line">        <span class="title function_">callHook</span>(vm, <span class="string">&#x27;beforeUpdate&#x27;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">true</span> <span class="comment">/* isRenderWatcher */</span>)</span><br><span class="line">  hydrating = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// manually mounted instance, call mounted on self</span></span><br><span class="line">  <span class="comment">// mounted is called for render-created child components in its inserted hook</span></span><br><span class="line">  <span class="keyword">if</span> (vm.<span class="property">$vnode</span> == <span class="literal">null</span>) &#123;</span><br><span class="line">    vm.<span class="property">_isMounted</span> = <span class="literal">true</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&#x27;mounted&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> vm</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在created到beforeMount之间最主要的工作是将模板或者el转换为render函数。beforeMount调用后开始渲染render函数。之后再调用mounted函数并将标识属性_isMounted置true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//src/core/instance/lifecycle.js</span></span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Watcher</span>(vm, updateComponent, noop, &#123;</span><br><span class="line">    before () &#123;</span><br><span class="line">      <span class="keyword">if</span> (vm.<span class="property">_isMounted</span> &amp;&amp; !vm.<span class="property">_isDestroyed</span>) &#123;</span><br><span class="line">        <span class="title function_">callHook</span>(vm, <span class="string">&#x27;beforeUpdate&#x27;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">true</span> <span class="comment">/* isRenderWatcher */</span>)</span><br><span class="line">  hydrating = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>组件在mounted之后与isDestroyed之前才会调用beforeUpdate.会重新生产一个虚拟DOM与原来的虚拟DOM做diff运算从而更新render函数中的数据，再将render函数渲染成真实DOM。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//src/core/observer/scheduler.js</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">flushSchedulerQueue</span> () &#123;</span><br><span class="line">  currentFlushTimestamp = <span class="title function_">getNow</span>()</span><br><span class="line">  flushing = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">let</span> watcher, id</span><br><span class="line"></span><br><span class="line">  queue.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.<span class="property">id</span> - b.<span class="property">id</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// do not cache length because more watchers might be pushed</span></span><br><span class="line">  <span class="comment">// as we run existing watchers</span></span><br><span class="line">  <span class="keyword">for</span> (index = <span class="number">0</span>; index &lt; queue.<span class="property">length</span>; index++) &#123;</span><br><span class="line">    watcher = queue[index]</span><br><span class="line">    <span class="keyword">if</span> (watcher.<span class="property">before</span>) &#123;</span><br><span class="line">      watcher.<span class="title function_">before</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    id = watcher.<span class="property">id</span></span><br><span class="line">    has[id] = <span class="literal">null</span></span><br><span class="line">    watcher.<span class="title function_">run</span>()</span><br><span class="line">    <span class="comment">// in dev build, check and stop circular updates.</span></span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; has[id] != <span class="literal">null</span>) &#123;</span><br><span class="line">      circular[id] = (circular[id] || <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">      <span class="keyword">if</span> (circular[id] &gt; <span class="variable constant_">MAX_UPDATE_COUNT</span>) &#123;</span><br><span class="line">        <span class="title function_">warn</span>(</span><br><span class="line">          <span class="string">&#x27;You may have an infinite update loop &#x27;</span> + (</span><br><span class="line">            watcher.<span class="property">user</span></span><br><span class="line">              ? <span class="string">`in watcher with expression &quot;<span class="subst">$&#123;watcher.expression&#125;</span>&quot;`</span></span><br><span class="line">              : <span class="string">`in a component render function.`</span></span><br><span class="line">          ),</span><br><span class="line">          watcher.<span class="property">vm</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// keep copies of post queues before resetting state</span></span><br><span class="line">  <span class="keyword">const</span> activatedQueue = activatedChildren.<span class="title function_">slice</span>()</span><br><span class="line">  <span class="keyword">const</span> updatedQueue = queue.<span class="title function_">slice</span>()</span><br><span class="line"></span><br><span class="line">  <span class="title function_">resetSchedulerState</span>()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// call component updated and activated hooks</span></span><br><span class="line">  <span class="title function_">callActivatedHooks</span>(activatedQueue)</span><br><span class="line">  <span class="title function_">callUpdatedHooks</span>(updatedQueue)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// devtool hook</span></span><br><span class="line">  <span class="comment">/* istanbul ignore if */</span></span><br><span class="line">  <span class="keyword">if</span> (devtools &amp;&amp; config.<span class="property">devtools</span>) &#123;</span><br><span class="line">    devtools.<span class="title function_">emit</span>(<span class="string">&#x27;flush&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在最后调用callUpdatedHooks方法。更新阶段完成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//src/core/instance/lifecycle.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">lifecycleMixin</span> (<span class="title class_">Vue</span>: <span class="title class_">Class</span>&lt;<span class="title class_">Component</span>&gt;) &#123;</span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_update</span> = <span class="keyword">function</span> (<span class="params">vnode: VNode, hydrating?: boolean</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">vm</span>: <span class="title class_">Component</span> = <span class="variable language_">this</span></span><br><span class="line">    <span class="keyword">const</span> prevEl = vm.<span class="property">$el</span></span><br><span class="line">    <span class="keyword">const</span> prevVnode = vm.<span class="property">_vnode</span></span><br><span class="line">    <span class="keyword">const</span> restoreActiveInstance = <span class="title function_">setActiveInstance</span>(vm)</span><br><span class="line">    vm.<span class="property">_vnode</span> = vnode</span><br><span class="line">    <span class="comment">// Vue.prototype.__patch__ is injected in entry points</span></span><br><span class="line">    <span class="comment">// based on the rendering backend used.</span></span><br><span class="line">    <span class="keyword">if</span> (!prevVnode) &#123;</span><br><span class="line">      <span class="comment">// initial render</span></span><br><span class="line">      vm.<span class="property">$el</span> = vm.<span class="title function_">__patch__</span>(vm.<span class="property">$el</span>, vnode, hydrating, <span class="literal">false</span> <span class="comment">/* removeOnly */</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// updates</span></span><br><span class="line">      vm.<span class="property">$el</span> = vm.<span class="title function_">__patch__</span>(prevVnode, vnode)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">restoreActiveInstance</span>()</span><br><span class="line">    <span class="comment">// update __vue__ reference</span></span><br><span class="line">    <span class="keyword">if</span> (prevEl) &#123;</span><br><span class="line">      prevEl.<span class="property">__vue__</span> = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">$el</span>) &#123;</span><br><span class="line">      vm.<span class="property">$el</span>.<span class="property">__vue__</span> = vm</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// if parent is an HOC, update its $el as well</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">$vnode</span> &amp;&amp; vm.<span class="property">$parent</span> &amp;&amp; vm.<span class="property">$vnode</span> === vm.<span class="property">$parent</span>.<span class="property">_vnode</span>) &#123;</span><br><span class="line">      vm.<span class="property">$parent</span>.<span class="property">$el</span> = vm.<span class="property">$el</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// updated hook is called by the scheduler to ensure that children are</span></span><br><span class="line">    <span class="comment">// updated in a parent&#x27;s updated hook.</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$forceUpdate</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">vm</span>: <span class="title class_">Component</span> = <span class="variable language_">this</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">_watcher</span>) &#123;</span><br><span class="line">      vm.<span class="property">_watcher</span>.<span class="title function_">update</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$destroy</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">vm</span>: <span class="title class_">Component</span> = <span class="variable language_">this</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">_isBeingDestroyed</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&#x27;beforeDestroy&#x27;</span>)</span><br><span class="line">    vm.<span class="property">_isBeingDestroyed</span> = <span class="literal">true</span></span><br><span class="line">    <span class="comment">// remove self from parent</span></span><br><span class="line">    <span class="keyword">const</span> parent = vm.<span class="property">$parent</span></span><br><span class="line">    <span class="keyword">if</span> (parent &amp;&amp; !parent.<span class="property">_isBeingDestroyed</span> &amp;&amp; !vm.<span class="property">$options</span>.<span class="property">abstract</span>) &#123;</span><br><span class="line">      <span class="title function_">remove</span>(parent.<span class="property">$children</span>, vm)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// teardown watchers</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">_watcher</span>) &#123;</span><br><span class="line">      vm.<span class="property">_watcher</span>.<span class="title function_">teardown</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> i = vm.<span class="property">_watchers</span>.<span class="property">length</span></span><br><span class="line">    <span class="keyword">while</span> (i--) &#123;</span><br><span class="line">      vm.<span class="property">_watchers</span>[i].<span class="title function_">teardown</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// remove reference from data ob</span></span><br><span class="line">    <span class="comment">// frozen object may not have observer.</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">_data</span>.<span class="property">__ob__</span>) &#123;</span><br><span class="line">      vm.<span class="property">_data</span>.<span class="property">__ob__</span>.<span class="property">vmCount</span>--</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// call the last hook...</span></span><br><span class="line">    vm.<span class="property">_isDestroyed</span> = <span class="literal">true</span></span><br><span class="line">    <span class="comment">// invoke destroy hooks on current rendered tree</span></span><br><span class="line">    vm.<span class="title function_">__patch__</span>(vm.<span class="property">_vnode</span>, <span class="literal">null</span>)</span><br><span class="line">    <span class="comment">// fire destroyed hook</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&#x27;destroyed&#x27;</span>)</span><br><span class="line">    <span class="comment">// turn off all instance listeners.</span></span><br><span class="line">    vm.$off()</span><br><span class="line">    <span class="comment">// remove __vue__ reference</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">$el</span>) &#123;</span><br><span class="line">      vm.<span class="property">$el</span>.<span class="property">__vue__</span> = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// release circular reference (#6759)</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">$vnode</span>) &#123;</span><br><span class="line">      vm.<span class="property">$vnode</span>.<span class="property">parent</span> = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在beforeDestroy之前还可以操作实例。在之后进行一系列的销毁动作，销毁完成后再执行destroyed</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2022-04-21 20:33:47
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFvue%E7%BB%84%E4%BB%B6"><span class="toc-text">什么是vue组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue%E7%BB%84%E4%BB%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%AD%98%E5%9C%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">vue组件为什么会存在生命周期</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/ugi57">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2022 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + vue%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F + '&url=' + https%3A%2F%2Fugi57.github.io%2F2022%2F04%2F21%2Fvue%25E7%25BB%2584%25E4%25BB%25B6%25E7%2594%259F%25E5%2591%25BD%25E5%2591%25A8%25E6%259C%259F%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://ugi57.github.io/2022/04/21/vue%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
