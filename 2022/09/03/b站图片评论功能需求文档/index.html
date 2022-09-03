@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="357的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="357的博客">
+    <meta name="keyword"  content="Aircloud">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        b站图片评论功能需求文档 - AirCloud
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>357</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E8%AE%A2%E8%AE%B0%E5%BD%95"><span class="toc-text">修订记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E8%83%8C%E6%99%AF"><span class="toc-text">需求背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF"><span class="toc-text">需求场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E7%94%A8%E6%88%B7"><span class="toc-text">目标用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-text">需求分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%97%E8%A1%A8"><span class="toc-text">需求列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%92%E8%89%B2%E8%AF%B4%E6%98%8E"><span class="toc-text">角色说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E8%A7%92%E8%89%B2"><span class="toc-text">产品功能设计角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-text">权限管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-text">引言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E6%A6%82%E8%BF%B0"><span class="toc-text">产品概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E8%AF%B4%E6%98%8E"><span class="toc-text">全局说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E5%8E%9F%E5%9E%8B%E7%95%8C%E9%9D%A2"><span class="toc-text">完整原型界面</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E7%AB%AF"><span class="toc-text">网页端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="toc-text">移动端</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-text">业务流程图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-text">页面流程图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">原型说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%9F%8B%E7%82%B9"><span class="toc-text">数据埋点</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        b站图片评论功能需求文档
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2022-09-03 17:47:59</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#需求文档" title="需求文档">需求文档</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#b站图片评论功能" title="b站图片评论功能">b站图片评论功能</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="修订记录"><a href="#修订记录" class="headerlink" title="修订记录"></a>修订记录</h2><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>完成时间</th>
+<th>修订内容</th>
+<th>修订人</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v1.0</td>
+<td>2022年7月14日</td>
+<td>完成初版文档</td>
+<td>项宇琦</td>
+</tr>
+</tbody></table>
+<h2 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h2><p>b站作为当下年轻人喜爱的视频网站，推出了许多互动方式，例如弹幕，而除了弹幕之外，用户也喜欢在视频下留下自己的评论与其他用户或者创作者进行互动</p>
+<h2 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h2><p>用户在观看视频时，为了追求互动性而留下自己的评论，图片评论更能直观简洁地表达观点，也增加了评论的多样性</p>
+<h2 id="目标用户"><a href="#目标用户" class="headerlink" title="目标用户"></a>目标用户</h2><p>b站作为一个二次元为主的网站，使用用户基本为热爱acg的年轻一代，而喜欢表达观点，熟悉网络玩法的用户也更喜欢在视频下留言互动。</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>为了解决用户无法直观简洁表达观点的问题，推出图片评论功能，使得评论方式更加多样，更能吸引用户进行评论。</p>
+<h2 id="需求列表"><a href="#需求列表" class="headerlink" title="需求列表"></a>需求列表</h2><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>功能点</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>评论模块</td>
+<td>点击图片按钮可添加图片评论，可删除图片</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>展示模块</td>
+<td>点击图片可显示原图</td>
+<td>P2</td>
+</tr>
+</tbody></table>
+<h2 id="角色说明"><a href="#角色说明" class="headerlink" title="角色说明"></a>角色说明</h2><h3 id="产品功能设计角色"><a href="#产品功能设计角色" class="headerlink" title="产品功能设计角色"></a>产品功能设计角色</h3><p>会员&#x2F;非会员&#x2F;游客</p>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><p>会员可以进行图片评论，非会员不能进行图片评论但可以查看评论图片原图，游客不能进行评论也不能查看原图</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="产品概述"><a href="#产品概述" class="headerlink" title="产品概述"></a>产品概述</h3><p>为增加用户评论留言的多样性，增加了图片留言的功能，会员能够进行图片留言，取消图片选择等操作。有利于增加视频的互动性，促进视频与评论相辅相成。</p>
+<h3 id="全局说明"><a href="#全局说明" class="headerlink" title="全局说明"></a>全局说明</h3><p>当用户为会员时图片按钮才可选，评论中的图片人人都可以看见</p>
+<h3 id="完整原型界面"><a href="#完整原型界面" class="headerlink" title="完整原型界面"></a>完整原型界面</h3><h4 id="网页端"><a href="#网页端" class="headerlink" title="网页端"></a>网页端</h4><img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc0.png" class>
+<p>点击评论输入框后如下一原型图所示</p>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc1.png" class>
+<p>发送成功后进入下一原型界面</p>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc.png" class>
+<p>点击图片按钮转至下一页面</p>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc2.png" class>
+
+<h4 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h4><img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile1.png" class>
+<p>点击评论输入框后如下一原型图所示</p>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile0.png" class>
+<p>发送成功后进入下一原型界面</p>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile2.png" class>
+<p>点击图片按钮转至下一页面</p>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile3.png" class>
+
+<h2 id="业务流程图"><a href="#业务流程图" class="headerlink" title="业务流程图"></a>业务流程图</h2><img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/img1.png" class>
+
+<h2 id="页面流程图"><a href="#页面流程图" class="headerlink" title="页面流程图"></a>页面流程图</h2><img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/img2.png" class>
+
+<h2 id="原型说明"><a href="#原型说明" class="headerlink" title="原型说明"></a>原型说明</h2><p>1.点击输入框出现图片选择按钮，并且输入框放大<br>2.图片选择按钮与表情并行排列，icon颜色与表情按钮相同；判断是否为会员，若是则图片按钮可选，若不是则图片按钮不可选并置灰。点击图片选择按钮调用本地相册进行图片选择<br>3.点击发布按钮，评论图片由后端进行审核，接入百度智能云进行图像识别，审核通过后发布在下方评论区<br>4.图片按一定比例缩略展示,原图大小进行压缩，独占一行，点击可放大查看原图,在未通过审核前只有当前用户能看到自己发的图片评论，审核通过后其他用户才能看到图片评论。一次只能选择一张图片。<br>5.评论语句与图片一起发布时，各占一行，数据来源于评论框输入内容<br>6.当已选择图片并返回评论页面时，图片按比例缩略显示在评论输入框，按叉键可以取消图片选择<br>7.点击发布按钮后，展示后端审核后评论发送是否成功的信息，位于页面正中央，3s后消失<br>8.原图展示退出按钮<br>9.点击任意处退出原图展示<br>10.点击评论处的图片后展示原图，位于正中央</p>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc1.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc2.png" class>
+
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile0.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile2.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile3.png" class>
+
+<h2 id="数据埋点"><a href="#数据埋点" class="headerlink" title="数据埋点"></a>数据埋点</h2><img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc1.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/pc2.png" class>
+
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile0.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile2.png" class>
+<img src="/2022/09/03/b%E7%AB%99%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/mobile3.png" class>
+
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>所在模块</th>
+<th>字段名称</th>
+<th>事件</th>
+<th>指标描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>001</td>
+<td>评论输入框</td>
+<td>input_click</td>
+<td>点击输入框</td>
+<td>PV UV</td>
+</tr>
+<tr>
+<td>002</td>
+<td>评论输入框</td>
+<td>photo_btn_click</td>
+<td>点击图片按钮</td>
+<td>PV UV</td>
+</tr>
+<tr>
+<td>003</td>
+<td>评论输入框</td>
+<td>post_btn_click</td>
+<td>点击发布按钮</td>
+<td>PV UV</td>
+</tr>
+<tr>
+<td>005</td>
+<td>评论展示区</td>
+<td>comment_show</td>
+<td>浏览评论</td>
+<td>PV UV</td>
+</tr>
+<tr>
+<td>004</td>
+<td>评论展示区</td>
+<td>photo_click</td>
+<td>点击查看原图</td>
+<td>PV  UV</td>
+</tr>
+<tr>
+<td>006</td>
+<td>评论输入框</td>
+<td>photo_cancel</td>
+<td>点击图片取消按钮</td>
+<td>PV UV</td>
+</tr>
+<tr>
+<td>007</td>
+<td>审核通过提示</td>
+<td>approval_tip</td>
+<td>曝光审核通过提示</td>
+<td>PV UV</td>
+</tr>
+<tr>
+<td>008</td>
+<td>原图展示</td>
+<td>exit_btn_click</td>
+<td>点击退出按钮</td>
+<td>PV UV</td>
+</tr>
+<tr>
+<td>009</td>
+<td>原图展示</td>
+<td>anyplace_click</td>
+<td>在任意处点击</td>
+<td>PV UV</td>
+</tr>
+</tbody></table>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/ugi57">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="aircloud/hexo-aircloud-blog"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkxMjkwNDgyNjg="
+    data-category="Announcements"
+    data-category-id="DIC_kwDOB7EezM4COhKJ"
+    data-mapping="title"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>

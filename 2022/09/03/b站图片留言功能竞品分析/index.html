@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="357的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="357的博客">
+    <meta name="keyword"  content="Aircloud">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        b站图片留言功能竞品分析 - AirCloud
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>357</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E5%AE%9A%E4%BD%8D"><span class="toc-text">产品定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#b%E7%AB%99%E5%9B%BE%E7%89%87%E7%95%99%E8%A8%80"><span class="toc-text">b站图片留言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E6%97%A7%E7%8A%B6%E7%9B%B8%E6%AF%94"><span class="toc-text">与旧状相比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90"><span class="toc-text">用户分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#b%E7%AB%99%EF%BC%9A"><span class="toc-text">b站：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B1%E5%A5%87%E8%89%BA%EF%BC%9A"><span class="toc-text">爱奇艺：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E6%B5%AA%E5%BE%AE%E5%8D%9A%EF%BC%9A"><span class="toc-text">新浪微博：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">功能分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E4%BC%BC%E7%82%B9%EF%BC%9A"><span class="toc-text">相似点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-text">不同点:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        b站图片留言功能竞品分析
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2022-09-03 15:49:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#竞品分析" title="竞品分析">竞品分析</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#b站图片评论功能" title="b站图片评论功能">b站图片评论功能</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="产品定位"><a href="#产品定位" class="headerlink" title="产品定位"></a>产品定位</h2><h3 id="b站图片留言"><a href="#b站图片留言" class="headerlink" title="b站图片留言"></a>b站图片留言</h3><p>b站作为一个视频网站，非常重视用户与视频之间的互动性与用户体验感，从早期的弹幕可以看出b站十分鼓励用户发表自己的看法，为了提升互动性，在b站的视频评论界面加入发表图片功能，使得用户评论更加自定义性，有利于产出热评从而反哺视频。</p>
+<h3 id="与旧状相比"><a href="#与旧状相比" class="headerlink" title="与旧状相比"></a>与旧状相比</h3><p>与旧状相比，用户在使用图片评论时，相比内置的表情包有了更多选择性，提升了体验感。而图片更能直观表达用户情绪，容易引发共鸣。</p>
+<h2 id="用户分析"><a href="#用户分析" class="headerlink" title="用户分析"></a>用户分析</h2><h3 id="b站："><a href="#b站：" class="headerlink" title="b站："></a>b站：</h3><p>用户年龄集中在年轻一代之间，追求视频互动，热衷于发视频弹幕与评论，有更长的互动时间投入。多为acg爱好者，以及宅文化爱好者。用户年龄相比爱奇艺更小。更熟悉网络玩法与网络互动。</p>
+<h3 id="爱奇艺："><a href="#爱奇艺：" class="headerlink" title="爱奇艺："></a>爱奇艺：</h3><p>用户年龄集中在年轻一代与中年一代之间，追求视频资源，对视频观看投入更长，互动投入更小，热衷于追剧&#x2F;追综艺。用户年龄相对较大。</p>
+<h3 id="新浪微博："><a href="#新浪微博：" class="headerlink" title="新浪微博："></a>新浪微博：</h3><p>用户年龄集中在年轻一代之间，热衷于追求热点与评论交流。基本上全部时间投入在互动中。追逐网络热点，熟悉网络玩法</p>
+<h2 id="功能分析"><a href="#功能分析" class="headerlink" title="功能分析"></a>功能分析</h2><h3 id="相似点："><a href="#相似点：" class="headerlink" title="相似点："></a>相似点：</h3><p>点击评论后出现表情，文字输入框，相册照片等选择。选择相册照片后能够发布带有手机图片的评论并显示。图片发表的功能，不仅利于评论者直接表达自身情绪，也利于观看者获取更多信息，产生共鸣。</p>
+<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点:"></a>不同点:</h3><ul>
+<li><p>b站：b站的视频资源主要集中于acg相关，得益于弹幕文化，b站拥有更强的用户互动性，用户更乐于更主动与其他用户分享交流情绪。各个视频下不乏出现热评。并且b站的评论界面直接显示在视频下方，基本做到视频与评论显示一比一的效果。用户进入b站观看视频时，也有更大机会浏览评论来获取信息。同时评论的热度也会带来视频的热度，一个有趣的评论也会吸引观看者。b站的评论取更类似与百度贴吧与新浪微博，更有互动性与讨论性。</p>
+</li>
+<li><p>爱奇艺：爱奇艺的视频资源主要集中于国产电视剧，电影，综艺等。竞争力主要在于视频资源上，用户更乐于去使用爱奇艺追剧&#x2F;追综艺，用户投入在视频观看上的时间更多。爱奇艺的评论界面显示在视频的右侧，占比小更容易被忽略。爱奇艺的评论区更类似于传统的视频评论。评论热度与视频热度无相互作用。</p>
+</li>
+<li><p>新浪微博：新浪微博作为一个社交网站，用户更加注重于微博下的沟通讨论，以及对热点的关注。互动性超过b站与爱奇艺。主要的功能就在于社交与互动。评论热度与微博热度成正比并且相辅相成。一个出众的评论甚至可能超过原微博。</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>图片留言功能的出现，代表着b站评论区更往社区帖子的方向发展，更利于实现视频与用户，用户与用户，用户与社区间的互动。也满足了视频浏览者发表情绪看法，交流沟通的需求。与传统影视只观不评的形式不同，在新型影视平台中，观看者互动与情绪输出和视频热度相辅相成，不可或缺。而图片更直观表达内心感受，利于评论区的发展与丰富。同时，与纯社交平台相比，b站保留了视频平台网站的特性，并没有出现评论大于视频的现象，内容产出还是以视频为主，评论只起到交流分享作用。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/ugi57">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="aircloud/hexo-aircloud-blog"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkxMjkwNDgyNjg="
+    data-category="Announcements"
+    data-category-id="DIC_kwDOB7EezM4COhKJ"
+    data-mapping="title"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+
+</html>
